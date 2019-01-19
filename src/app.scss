@@ -1,0 +1,100 @@
+body {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#app {
+  max-width: 960px;
+  margin: 0 auto 30px;
+}
+
+.container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.card {
+  height: 200px;
+  width: 200px;
+  transition: 0.4s;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 10px #333;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card.flipped:hover {
+  box-shadow: none;
+}
+
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 0;
+}
+
+.back {
+  transform: rotateY(180deg);
+  cursor: not-allowed;
+}
+
+.front {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  transform: rotateY(0deg);
+  background-color:silver;
+  background-image:
+  radial-gradient(circle at 100% 150%, silver 24%, white 25%, white 28%, silver 29%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
+  radial-gradient(circle at 0    150%, silver 24%, white 25%, white 28%, silver 29%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
+  radial-gradient(circle at 50%  100%, white 10%, silver 11%, silver 23%, white 24%, white 30%, silver 31%, silver 43%, white 44%, white 50%, silver 51%, silver 63%, white 64%, white 71%, transparent 71%, transparent),
+  radial-gradient(circle at 100% 50%, white 5%, silver 6%, silver 15%, white 16%, white 20%, silver 21%, silver 30%, white 31%, white 35%, silver 36%, silver 45%, white 46%, white 49%, transparent 50%, transparent),
+  radial-gradient(circle at 0    50%, white 5%, silver 6%, silver 15%, white 16%, white 20%, silver 21%, silver 30%, white 31%, white 35%, silver 36%, silver 45%, white 46%, white 49%, transparent 50%, transparent);
+  background-size: 100px 50px;
+  transition-property: opacity, transform, box-shadow;
+  transition-duration: .3s;
+  backface-visibility: hidden;
+}
+
+.pulse {
+  animation: pulse 0.7s 2, grow 0.7s 2;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1) rotateY(180deg);
+  }
+
+  50% {
+    transform: scale(1.05) rotateY(180deg);
+  }
+
+  100% {
+    transform: scale(1) rotateY(180deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0,128,0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(0,128,0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0,128,0, 0);
+  }
+}
