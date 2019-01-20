@@ -10,7 +10,7 @@
     </overlay>
 
     <div v-if="playing" class="pb3">
-      <progress-timer :paused="paused || completed" />
+      <progress-timer v-if="rendered" :paused="paused || completed" />
 
       <p v-if="playing" class="f5">Round: {{ round }} | Discovered: {{ discovered }}</p>
 
@@ -22,7 +22,7 @@
     <overlay v-if="completed">
       <h2 class="f2 f1-l fw2 white-90 mb1 lh-title mt0 mb3">Congratulations! You did it!</h2>
       <h4 class="f4 white-90 fw2 mt0 mb3">Your score: {{ score }}</h4>
-      <button @click="$store.commit('start')" class="pointer grow dib v-mid bg-orange white ph3 pv2 mb3">
+      <button @click="restart" class="pointer grow dib v-mid bg-orange white ph3 pv2 mb3">
         Restart
       </button>
     </overlay>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import store from "./store";
 import { mapState, mapGetters } from "vuex";
 import Overlay from "./components/Overlay.vue";
@@ -55,6 +56,11 @@ export default {
     overlay: Overlay,
     "progress-timer": ProgressTimer
   },
+  data: function () {
+    return {
+      rendered: true
+    }
+  },
   methods: {
     start() {
       store.commit("start");
@@ -67,6 +73,15 @@ export default {
     },
     resume() {
       store.commit("resume");
+    },
+    restart() {
+      this.rendered = false;
+
+      Vue.nextTick().then(() => {
+        this.rendered = true;
+
+        store.commit('start');
+      });
     }
   },
   computed: {
