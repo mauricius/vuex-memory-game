@@ -43,7 +43,6 @@
 
 <script>
 import Vue from 'vue';
-import store from "./store";
 import { mapState, mapGetters } from "vuex";
 import Overlay from "./components/Overlay.vue";
 import Card from "./components/Card.vue";
@@ -63,16 +62,16 @@ export default {
   },
   methods: {
     start() {
-      store.commit("start");
+      this.$store.commit("start");
     },
     onFlip(id) {
-      store.commit("flip", { id });
+      this.$store.commit("flip", { id });
     },
     pause() {
-      store.commit("pause");
+      this.$store.commit("pause");
     },
     resume() {
-      store.commit("resume");
+      this.$store.commit("resume");
     },
     restart() {
       this.rendered = false;
@@ -80,7 +79,7 @@ export default {
       Vue.nextTick().then(() => {
         this.rendered = true;
 
-        store.commit('start');
+        this.$store.commit('start');
       });
     }
   },
