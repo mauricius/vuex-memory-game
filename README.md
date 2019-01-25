@@ -1,4 +1,6 @@
-# vuex-memory-game
+# Vuex Memory Game
+
+Vuex implementation of a memory game. An attempt compare this approach with the [Redux version](https://github.com/mauricius/redux-memory-game) built a few years ago.
 
 ## Project setup
 ```
@@ -17,7 +19,7 @@ npm run build
 
 ### Run your tests
 ```
-npm run test
+npm run test:unit
 ```
 
 ### Lints and fixes files
